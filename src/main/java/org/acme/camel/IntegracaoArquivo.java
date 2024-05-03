@@ -5,8 +5,9 @@ import org.apache.camel.builder.RouteBuilder;
 public class IntegracaoArquivo extends RouteBuilder {
     @Override
     public void configure() throws Exception {
-        from("file:tmp/in/")
+        from("file:{{diretorioEntrada}}?delay=5000")
                 .routeId("integracao-arquivo")
-                .to("file:tmp/out/");
+                .log("Processando o arquivo: ${file:name}")
+                .to("file:{{diretorioSaida}}");
     }
 }
